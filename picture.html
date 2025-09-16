@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片画廊</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #222;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover .overlay {
+            transform: translateY(0);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #888;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>自然风光画廊</h1>
+            <p>探索世界各地的美丽风景</p>
+        </header>
+        
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400/3498db/ffffff" alt="山水风景">
+                <div class="overlay">
+                    <h3>山水之美</h3>
+                    <p>壮丽的山脉与清澈的湖水相映成趣</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400/2ecc71/ffffff" alt="森林">
+                <div class="overlay">
+                    <h3>绿色森林</h3>
+                    <p>茂密的森林，充满生机与活力</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400/e74c3c/ffffff" alt="沙漠">
+                <div class="overlay">
+                    <h3>沙漠奇观</h3>
+                    <p>金色的沙丘在阳光下闪耀</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400/9b59b6/ffffff" alt="极光">
+                <div class="overlay">
+                    <h3>北极之光</h3>
+                    <p>夜空中舞动的绿色极光</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400/f1c40f/ffffff" alt海滩>
+                <div class="overlay">
+                    <h3>热带海滩</h3>
+                    <p>白色沙滩与蔚蓝海水的完美结合</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x400/34495e/ffffff" alt="瀑布">
+                <div class="overlay">
+                    <h3>壮丽瀑布</h3>
+                    <p>水流从高处倾泻而下，气势磅礴</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 自然风光画廊 | 使用来自占位符的图片</p>
+        </footer>
+    </div>
+
+    <div class="modal" id="imageModal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // 简单的模态框功能
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                modalImage.src = imgSrc;
+                modal.style.display = 'flex';
+            });
+        });
+        
+        modalClose.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
